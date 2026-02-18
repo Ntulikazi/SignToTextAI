@@ -36,8 +36,11 @@ while True:
             )
 
             data = []
+
+            wrist = hand_landmarks.landmark[0]
+            base_x, base_y, base_z = wrist.x, wrist.y, wrist.z
             for lm in hand_landmarks.landmark:
-                data.extend([lm.x, lm.y, lm.z])
+                data.extend([lm.x-base_x, lm.y-base_y, lm.z-base_z])
 
             # Convert to numpy array
             data = np.array(data).reshape(1, -1)
